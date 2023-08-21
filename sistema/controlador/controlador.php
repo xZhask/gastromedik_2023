@@ -158,7 +158,10 @@ function controlador($accion)
             } else {
                 $listadopacientes = $objPaciente->FiltrarPaciente($filtro);
             }
+            $hoy = new DateTime(date('Y-m-d'));
             while ($fila = $listadopacientes->fetch(PDO::FETCH_NAMED)) {
+                $fecha_nacimiento =  new DateTime(date($fila['fecha_nac']));
+                $edad = $hoy->diff($fecha_nacimiento);
                 echo '<tr>';
                 echo '<td class="ta-center">' . $fila['dni'] . '</td>';
                 echo '<td class="ta-center">' .
@@ -166,8 +169,8 @@ function controlador($accion)
                     ', ' .
                     $fila['nombre'] .
                     '</td>';
-                //echo '<td class="ta-center">' . $fila['nombre'] . '</td>';
-                echo '<td class="ta-center">' . $fila['fecha_nac'] . '</td>';
+
+                echo '<td class="ta-center">' . $edad->format('%y años') . '</td>';
                 echo '<td class="ta-center">' . $fila['telefono'] . '</td>';
                 if ($_SESSION['cargo'] == 1 || $_SESSION['cargo'] == 4) {
                     echo '<td class="ta-center"><i class="fas fa-user-cog edit-paciente"></i></td>
@@ -462,7 +465,7 @@ function controlador($accion)
 
                         if ($idcargo == 1 || $idcargo == 2) {
                             if (
-                                $fila['motivo'] === 'CONSULTA MÉDICA' || $fila['motivo'] === 'CITA DE CONTROL'|| $fila['motivo'] === 'CONSULTA 0' ||
+                                $fila['motivo'] === 'CONSULTA MÉDICA' || $fila['motivo'] === 'CITA DE CONTROL' || $fila['motivo'] === 'CONSULTA 0' ||
                                 $obteneratencion['estado'] === 'EN PROGR'
                             ) {
                                 echo '<td class="ta-center"><i class="far fa-calendar-plus"></i></td>';

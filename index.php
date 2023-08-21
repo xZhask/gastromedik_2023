@@ -117,7 +117,7 @@ $cargo = $_SESSION['cargo'];
         </div>
         <label for="">Fecha de Nacimiento</label>
         <input type="date" name="fechanac" id="fechanac" />
-        <input type="text" placeholder="N° Celular" id="NroCelular" name="NroCelular" />
+        <input type="text" name="NroCelular" placeholder="N° Celular" id="NroCelular" />
         <button type="button" onclick="RegistrarPaciente()">Registrar</button>
       </form>
       <form id="frmregistrarusuario">

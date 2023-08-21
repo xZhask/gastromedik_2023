@@ -551,12 +551,13 @@ $(function () {
     let llamadoAjax = ajaxFunction(data);
     json = JSON.parse(llamadoAjax);
     paciente = json.paciente;
+
     $("#NombrePaciente").val(paciente[0].nombre);
     $("#ApellidosPaciente").val(paciente[0].apellidos);
     $("#NroCelular").val(paciente[0].telefono);
     $("#fechanac").val(paciente[0].fecha_nac);
-    $("#AccionPaciente").val("ACTUALIZAR_PACIENTE");
     abrirRegistrarPaciente();
+    $("#AccionPaciente").val("ACTUALIZAR_PACIENTE");
   });
 });
 
